@@ -23,7 +23,7 @@ Blood-Help is a full-stack web application that connects users with blood donors
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/blood-help.git
+   https://github.com/ibugithub/blood-help.git
 Set up the backend:
 
 Install Django dependencies:
