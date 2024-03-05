@@ -3,7 +3,7 @@ import React from 'react';
 const SignIn = () => {
   return (
     <>
-      <h1 className='text-center pt-5 text-2xl mt-32'>Signin</h1>
+      <h1 className='text-center pt-5 text-2xl mt-32'>Sign in</h1>
       <form action="" className='flex flex-col gap-2 items-center mt-10'>
         <div>
           <input type="text" name='email' placeholder='Email' className='p-1' />
