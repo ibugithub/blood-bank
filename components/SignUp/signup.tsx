@@ -1,25 +1,44 @@
 'use client'
 
-import React, {useState} from 'react';
+import React, {FormEvent, useState} from 'react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 const SignUp = () => {
+  const  router = useRouter();
   const [formData, setFormData]= useState({
     email: "",
     first_name: "",
     last_name: "",
     password: "",
-    confirm_password: ""
+    password2: ""
   })
+  const [error, setError] = useState("") 
 
   const handleChange = (e:React.ChangeEvent<HTMLInputElement>) => {
-    console.log("I am in the handle change");
     setFormData({...formData, [e.target.name]:e.target.value})
   }
-  const {email, first_name, last_name, password, confirm_password} = formData;
+  const {email, first_name, last_name, password, password2} = formData;
+
+  const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
+    console.log('The form data are', formData);
+    e.preventDefault();
+    if (!email || !first_name || !last_name || !password || !password2) {
+      setError("All fields are required")
+    }
+    else {
+      setError("")
+      const req = await axios.post("http://127.0.0.1:8000/api/register/", formData)
+      if(req.status === 201){
+        router.push('/verifyemail')
+      }
+    }
+  }
   return (
     <>
       <h1 className='text-center pt-5 text-2xl mt-16'>Signup</h1>
-      <form action="" className='flex flex-col gap-2 items-center mt-10'>
+      <div className='text-red-700 text-center '>{error}</div>
+      <form action="" onSubmit={handleSubmit} className='flex flex-col gap-2 items-center mt-10'>
         <div>
           <input type="text" name='email' value={email} placeholder='Email' className='p-1 text-red-900' onChange={handleChange}/>
         </div>
@@ -33,10 +52,10 @@ const SignUp = () => {
           <input type="password" name='password' placeholder='Password' className='p-1 text-red-900' value={password} onChange={handleChange} />
         </div>
         <div>
-          <input type="password" name='confirm_password' placeholder='Confirm Password' className='p-1 text-red-900' value={confirm_password} onChange={handleChange}/>
+          <input type="password" name='password2' placeholder='Confirm Password' className='p-1 text-red-900' value={password2} onChange={handleChange}/>
         </div>
         <div className='text-center mt-2'>
-          <input type="submit" value='submit' className='bg-red-900 p-2' />
+          <input type="submit" value='submit' className='bg-red-900 p-2'/>
         </div>
       </form>
       <div className='flex flex-col items-center mt-2 gap-3'>
