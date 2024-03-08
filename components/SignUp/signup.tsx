@@ -21,7 +21,6 @@ const SignUp = () => {
   const {email, first_name, last_name, password, password2} = formData;
 
   const handleSubmit = async (e:FormEvent<HTMLFormElement>) => {
-    console.log('The form data are', formData);
     e.preventDefault();
     if (!email || !first_name || !last_name || !password || !password2) {
       setError("All fields are required")
@@ -38,7 +37,7 @@ const SignUp = () => {
     <>
       <h1 className='text-center pt-5 text-2xl mt-16'>Signup</h1>
       <div className='text-red-700 text-center '>{error}</div>
-      <form action="" onSubmit={handleSubmit} className='flex flex-col gap-2 items-center mt-10'>
+      <form onSubmit={handleSubmit} className='flex flex-col gap-2 items-center mt-10'>
         <div>
           <input type="text" name='email' value={email} placeholder='Email' className='p-1 text-red-900' onChange={handleChange}/>
         </div>
