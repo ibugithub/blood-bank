@@ -3,6 +3,7 @@
 import React, {FormEvent, useState} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const SignUp = () => {
   const  router = useRouter();
@@ -30,6 +31,7 @@ const SignUp = () => {
       const req = await axios.post("http://127.0.0.1:8000/api/register/", formData)
       if(req.status === 201){
         router.push('/verifyemail')
+        toast.success('Registration successful');
       }
     }
   }
