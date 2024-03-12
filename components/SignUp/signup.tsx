@@ -28,7 +28,7 @@ const SignUp = () => {
     }
     else {
       setError("")
-      const req = await axios.post("http://127.0.0.1:8000/api/register/", formData)
+      const req = await axios.post("http://127.0.0.1:8000/api/register", formData)
       if(req.status === 201){
         router.push('/verifyemail')
         toast.success('Registration successful');

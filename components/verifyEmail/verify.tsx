@@ -3,6 +3,7 @@
 import React, {FormEvent, useState} from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 const  VerifyEmail = () => {
   const [otpCode, setOtpCode] = useState("");
@@ -16,6 +17,7 @@ const  VerifyEmail = () => {
     const req = await axios.post("http://127.0.0.1:8000/api/verify-email", otp)
     if (req.status === 200) {
       router.push('/signin')
+      toast.success("Email verified successfully")
     }
   };
   return (
